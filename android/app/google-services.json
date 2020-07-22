@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "289397023269",
+    "firebase_url": "https://yourshop-f05d7.firebaseio.com",
+    "project_id": "yourshop-f05d7",
+    "storage_bucket": "yourshop-f05d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289397023269:android:4970187a926461073115cc",
+        "android_client_info": {
+          "package_name": "com.yourshop.amitapps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "289397023269-b4smlsf5une3prsr24at5hhu3b8hi18d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZAuUZdtGgWe2gFGqJ4XM2vChdTY6NuvM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "289397023269-b4smlsf5une3prsr24at5hhu3b8hi18d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
