@@ -1,6 +1,6 @@
 # yourshop
-
-A new Flutter project.
+Yourshop provide a platform where user sell and buy their
+Old product in very easy way it's like an olx in fluttter
 
 ## Getting Started
 
