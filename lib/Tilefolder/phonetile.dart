@@ -1,8 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:yourshop/phonefulldetail.dart';
-import 'package:yourshop/services/crud.dart';
 
-import '../elctronicfulldetail.dart';
+
 
 class Phonetile extends StatefulWidget {
   String title,

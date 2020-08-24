@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 
 import "package:flutter/material.dart";
 
-import 'package:yourshop/elctronicfulldetail.dart';
+
 import 'package:yourshop/phonefulldetail.dart';
 
 import "package:yourshop/services/crud.dart";

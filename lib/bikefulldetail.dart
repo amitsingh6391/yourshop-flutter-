@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:cloud_firestore/cloud_firestore.dart";
+import 'package:url_launcher/url_launcher.dart';
 
 //for only selction one category...
 
@@ -14,6 +15,7 @@ class _BikedetailsState extends State<Bikedetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.black,
           child: GestureDetector(
@@ -94,7 +96,7 @@ class _BikedetailsState extends State<Bikedetails> {
                             Row(
                               children: <Widget>[
                                 Text(
-                                  "₹. 💵💵 ",
+                                  "₹. ",
                                   style: TextStyle(fontSize: 20),
                                 ),
                                 Text(
@@ -113,14 +115,28 @@ class _BikedetailsState extends State<Bikedetails> {
                                       fontWeight: FontWeight.bold),
                                 )),
                             SizedBox(height: 10),
-                            Row(
-                              children: <Widget>[
-                                Text("Contact no:  ☎️  ",
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold)),
-                                Text(Bikedetails["contact"]),
-                              ],
+                            GestureDetector(
+                              onTap: () {
+                                var x = Bikedetails["contact"];
+
+                                launch("tel:// $x");
+                              },
+                              child: Row(
+                                children: <Widget>[
+                                  Text(Bikedetails["contact"],
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.green,
+                                          fontWeight: FontWeight.bold)),
+                                  Container(
+                                    height: 40,
+                                    child: Image(
+                                        fit: BoxFit.fill,
+                                        image: AssetImage(
+                                            "assets/images/call logo.jpg")),
+                                  ),
+                                ],
+                              ),
                             ),
                             SizedBox(height: 10),
                             Row(
@@ -131,7 +147,7 @@ class _BikedetailsState extends State<Bikedetails> {
                             Container(
                                 alignment: Alignment.bottomLeft,
                                 child: Text(Bikedetails["address"],
-                                    style: TextStyle(fontSize: 15)))
+                                    style: TextStyle(fontSize: 20)))
                           ],
                         )
                       ],

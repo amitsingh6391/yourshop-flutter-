@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:cloud_firestore/cloud_firestore.dart";
+import "package:url_launcher/url_launcher.dart";
 
 //for only selction one category...
 
@@ -14,6 +15,7 @@ class _ElectronicfulldetailsState extends State<Electronicfulldetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.black,
           child: GestureDetector(
@@ -95,7 +97,7 @@ class _ElectronicfulldetailsState extends State<Electronicfulldetails> {
                             Row(
                               children: <Widget>[
                                 Text(
-                                  "₹. 💵💵 ",
+                                  "₹.",
                                   style: TextStyle(fontSize: 20),
                                 ),
                                 Text(
@@ -110,18 +112,48 @@ class _ElectronicfulldetailsState extends State<Electronicfulldetails> {
                                 child: Text(
                                   Electronicfulldetails["title"],
                                   style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold),
+                                    fontSize: 25,
+                                    //fontWeight: FontWeight.bold
+                                  ),
                                 )),
                             SizedBox(height: 10),
-                            Row(
-                              children: <Widget>[
-                                Text("Contact no:  ☎️  ",
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold)),
-                                Text(Electronicfulldetails["contact"]),
-                              ],
+                            GestureDetector(
+                              onTap: () {
+                                var x = Electronicfulldetails["contact"];
+
+                                launch("tel:// $x");
+                              },
+                              child: Row(
+                                children: <Widget>[
+                                  // Text("☎️",
+                                  //     style: TextStyle(
+                                  //         fontSize: 30,
+                                  //         fontWeight: FontWeight.bold)
+                                  //         ),
+                                  GestureDetector(
+                                      onTap: () {
+                                        var x =
+                                            Electronicfulldetails["contact"];
+
+                                        launch("tel:// $x");
+                                      },
+                                      child: Text(
+                                          Electronicfulldetails["contact"],
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.green,
+                                              fontWeight: FontWeight.bold)
+                                              )),
+
+                                  Container(
+                                    height: 40,
+                                    child: Image(
+                                        fit: BoxFit.fill,
+                                        image: AssetImage(
+                                            "assets/images/call logo.jpg")),
+                                  ),
+                                ],
+                              ),
                             ),
                             SizedBox(height: 10),
                             Row(
@@ -132,7 +164,10 @@ class _ElectronicfulldetailsState extends State<Electronicfulldetails> {
                             Container(
                                 alignment: Alignment.bottomLeft,
                                 child: Text(Electronicfulldetails["address"],
-                                    style: TextStyle(fontSize: 15)))
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      // fontWeight: FontWeight.bold
+                                    )))
                           ],
                         )
                       ],

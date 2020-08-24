@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import "package:flutter/material.dart";
 import "dart:io";
@@ -8,16 +9,37 @@ import 'package:image_picker/image_picker.dart';
 import 'package:random_string/random_string.dart';
 import 'package:image_cropper/image_cropper.dart';
 import "package:intl/intl.dart";
+import 'package:yourshop/categorywiseproduct/electronicdata.dart';
 
 import "package:yourshop/pages/Homescreen.dart";
 
-class Electronicdata extends StatefulWidget {
+class Electronicdataupload extends StatefulWidget {
   @override
-  _ElectronicdataState createState() => _ElectronicdataState();
+  _ElectronicdatauploadState createState() => _ElectronicdatauploadState();
 }
 
-class _ElectronicdataState extends State<Electronicdata> {
+class _ElectronicdatauploadState extends State<Electronicdataupload> {
   String title, desc, contact, price, address;
+
+   @override
+  void initState() {
+    // TODO: implement initState
+
+    getCurrentUser();
+
+    super.initState();
+  }
+
+String userid;
+   getCurrentUser() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseUser user = await _auth.currentUser();
+    final uid = user.uid;
+    print(uid);
+    setState(() {
+      userid = uid.toString();
+    });
+  }        
 
   File selected1Image;
   File selected2Image;
@@ -110,13 +132,30 @@ class _ElectronicdataState extends State<Electronicdata> {
         'time': DateTime.now().millisecondsSinceEpoch,
         "posttime": DateFormat("MM-dd - kk:mm").format(now),
         "documentID": documentID
-      }).then((result) {
-        Navigator.push(
+      });
+      await Firestore.instance.collection("useradds").document(userid).collection("adds").document(documentID)
+.setData({
+
+       "image1url":bike1imageUrl,
+       "image2url":bike2imageurl,
+        "contact":contact,
+        "title": title,
+        "desc": desc,
+        "price":price,
+        "address":address,
+        'time': DateTime.now().millisecondsSinceEpoch,
+        "posttime": DateFormat("MM-dd - kk:mm").format(now),
+       
+        "documentID":documentID
+           
+         }).then((result){
+           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => Homescreen(),
+              builder: (context) => Electronicdata(),
             ));
-      });
+       
+         });
     } else {}
   }
 

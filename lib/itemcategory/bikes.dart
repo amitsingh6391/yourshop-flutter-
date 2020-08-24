@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import "package:flutter/material.dart";
 import "dart:io";
@@ -10,12 +11,31 @@ import 'package:image_cropper/image_cropper.dart';
 import "package:intl/intl.dart";
 import 'package:yourshop/categorywiseproduct/bikeandcycle.dart';
 
-class Bikedata extends StatefulWidget {
+class BikedataUpload extends StatefulWidget {
   @override
-  _BikedataState createState() => _BikedataState();
+  _BikedataUploadState createState() => _BikedataUploadState();
 }
 
-class _BikedataState extends State<Bikedata> {               
+class _BikedataUploadState extends State<BikedataUpload> {      
+String userid;
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    getCurrentUser();
+
+    super.initState();
+  }
+
+   getCurrentUser() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseUser user = await _auth.currentUser();
+    final uid = user.uid;
+    print(uid);
+    setState(() {
+      userid = uid.toString();
+    });
+  }         
   String  title, desc,contact,price,address;
 
   File selected1Image;
@@ -114,6 +134,25 @@ class _BikedataState extends State<Bikedata> {
        
         "documentID":documentID
            
+         }
+         );
+       
+
+await Firestore.instance.collection("useradds").document(userid).collection("adds").document(documentID)
+.setData({
+
+       "image1url":bike1imageUrl,
+       "image2url":bike2imageurl,
+        "contact":contact,
+        "title": title,
+        "desc": desc,
+        "price":price,
+        "address":address,
+        'time': DateTime.now().millisecondsSinceEpoch,
+        "posttime": DateFormat("MM-dd - kk:mm").format(now),
+       
+        "documentID":documentID
+           
          }).then((result){
            Navigator.push(
             context,
@@ -122,7 +161,6 @@ class _BikedataState extends State<Bikedata> {
             ));
        
          });
-
       
 
 

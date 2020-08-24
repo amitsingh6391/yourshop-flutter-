@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+
 import "package:yourshop/pages/Homescreen.dart";
 import "package:yourshop/pages/chatscreen.dart";
 import "package:yourshop/pages/myadsscreen.dart";
 import "package:yourshop/pages/profilescreen.dart";
 import "package:yourshop/pages/sellscreen.dart";
+import 'package:yourshop/view/viewmain.dart';
 
 
 
@@ -18,7 +22,7 @@ class Myapp extends StatelessWidget {
     return MaterialApp(
 
       title: "yourshop",
-      home: Homepage(),
+      home: Splashscreen(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -33,11 +37,12 @@ class _HomepageState extends State<Homepage> {
   GlobalKey _bottomNavigationKey = GlobalKey();
   var pages = [
   
-  Homescreen(),
-  Chatscreen(),
+ MyApp(),
+ // Homescreen(),
+  //Chatscreen(),
   Sellscreen(),
   
-   Myadsscreen(),
+   //Myadsscreen(),
    Profilescreen(),
  
   ];
@@ -50,39 +55,28 @@ class _HomepageState extends State<Homepage> {
           index: 0,
           height: 50.0,
           items: <Widget>[
+            
            Column(
              children: <Widget>[
                  SizedBox(height:10),
                Icon(Icons.home, size: 35,color: Colors.white,),
-               Text("Home",style: TextStyle(color:Colors.white),)
+               Text("Home",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),)
              ],
            ),
-            Column(
-              children: <Widget>[
-                SizedBox(height:10),
-                Icon(Icons.message, size: 35,color:Colors.white),
-                 Text("Chat",style: TextStyle(color:Colors.white),)
-              ],
-            ),
+           
             Column(
               children: <Widget>[
                  SizedBox(height:10),
                 Icon(Icons.shop, size: 35,color:Colors.white),
-                 Text("Sell",style: TextStyle(color:Colors.white),)
+                 Text("Sell",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),)
               ],
             ),
-            Column(
-              children: <Widget>[
-                 SizedBox(height:10),
-                Icon(Icons.favorite, size: 35,color:Colors.white),
-                 Text("My ads",style: TextStyle(color:Colors.white),)
-              ],
-            ),
+           
             Column(
               children: <Widget>[
                  SizedBox(height:10),
                 Icon(Icons.perm_identity, size: 35,color:Colors.white),
-                 Text("Profile",style: TextStyle(color:Colors.white),)
+                 Text("Profile",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),)
               ],
             ),
           ],
@@ -97,25 +91,105 @@ class _HomepageState extends State<Homepage> {
             });
           },
         ),
-        // body: Container(
-        //   color: Colors.white,
-        //   child: Center(
-        //     child: Column(
-        //       children: <Widget>[
-        //         Text(_page.toString(), textScaleFactor: 10.0),
-        //         RaisedButton(
-        //           child: Text('Go To Page of index 1'),
-        //           onPressed: () {
-        //             final CurvedNavigationBarState navBarState =
-        //                 _bottomNavigationKey.currentState;
-        //             navBarState.setPage(1);
-        //           },
-        //         )
-        //       ],
-        //     ),
-        //   ),
-        // )
+       
         body:pages[_page]
     );
   }
 }
+
+class Splashscreen extends StatefulWidget {
+
+  
+  @override
+  _SplashscreenState createState() => _SplashscreenState();
+}
+
+class _SplashscreenState extends State<Splashscreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    Timer(
+      Duration(seconds:5),
+      () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>Homepage(),
+            ));
+      },
+    );
+    super.initState();
+  }
+  @override
+
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+
+     backgroundColor:Colors.green,
+      body: SafeArea(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height:MediaQuery.of(context).size.height/4),
+                   
+
+                    SizedBox(height:20),
+                   
+                    Center(
+                      child: Container(
+
+                        height: 200,
+                        width:200,
+                       
+                       decoration: BoxDecoration(
+                         borderRadius: BorderRadius.circular(120),
+                         image:DecorationImage(
+
+                           image: AssetImage(
+                             "assets/images/yleafe.jpg"
+                           ),fit:BoxFit.fill
+
+                         ),
+                          color: Colors.red,
+                        
+                       ),
+
+                       child:Text("")
+                       
+                      ),
+
+                    ),SizedBox(height:10),
+
+                     Text(
+                      "Buy & Sell Product Now",
+                      style: TextStyle(fontSize:30,fontFamily: "Dancing",
+                    fontWeight:FontWeight.bold,color:Colors.orange
+                    ),),
+                    SizedBox(height:10),
+
+                   CircularProgressIndicator(
+                     backgroundColor:Colors.red
+                   ),
+                    
+                    SizedBox(
+                      height:200
+                    ),
+                    Text(
+                      "Offerd By: CodeApps Inc.",
+                      style: TextStyle(fontSize:20,fontFamily: "Dancing",
+                    fontWeight:FontWeight.bold,
+                    ),)
+                  ],
+                ),
+              ),
+      ),
+      
+    );
+  }
+}
+

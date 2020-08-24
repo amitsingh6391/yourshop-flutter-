@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:cloud_firestore/cloud_firestore.dart";
+import 'package:url_launcher/url_launcher.dart';
 
 class Phonefulldetail extends StatefulWidget {
   String documentID;
@@ -14,6 +15,7 @@ class _Phonedetailnewtate extends State<Phonefulldetail> {
     return 
     
     Scaffold(
+      backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black,
         child:GestureDetector(
@@ -99,7 +101,7 @@ class _Phonedetailnewtate extends State<Phonefulldetail> {
                           Row(
                             children: <Widget>[
                               Text(
-                                "₹. 💵💵 ",
+                                "₹. ",
                                 style: TextStyle(fontSize: 20),
                               ),
                              
@@ -114,12 +116,31 @@ class _Phonedetailnewtate extends State<Phonefulldetail> {
                             alignment: Alignment.bottomLeft,
                             child: Text(Phonedetailnew["title"],style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),)),
                          SizedBox(height:10),
-                          Row(
-                            children: <Widget>[
-                              Text("Contact no:  ☎️  ",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
-                             
-                              Text(Phonedetailnew["contact"]),
-                            ],
+                          GestureDetector(
+                            onTap: () {
+                                var x =Phonedetailnew["contact"];
+
+                                launch("tel:// $x");
+                              },
+                                                      child: Row(
+                              children: <Widget>[
+                                //Text("Contact no:  ☎️  ",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+                               
+                                Text(Phonedetailnew["contact"],
+                                style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.green,
+                                              fontWeight: FontWeight.bold)),
+
+                                 Container(
+                                    height: 40,
+                                    child: Image(
+                                        fit: BoxFit.fill,
+                                        image: AssetImage(
+                                            "assets/images/call logo.jpg")),
+                                  ),
+                              ],
+                            ),
                           ),
                            SizedBox(height:10),
                          Row(
@@ -130,7 +151,7 @@ class _Phonedetailnewtate extends State<Phonefulldetail> {
                          ),
                          Container(
                            alignment: Alignment.bottomLeft,
-                           child: Text(Phonedetailnew["address"],style:TextStyle(fontSize:15)))
+                           child: Text(Phonedetailnew["address"],style:TextStyle(fontSize:20)))
                             ],
                           )
                         ],
