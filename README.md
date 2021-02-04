@@ -1,7 +1,7 @@
 # yourshop
 Yourshop provide a platform where user sell and buy their
 Old product in very easy way it's like an olx in fluttter
-
+You can select your category and filter according that 
 ## Getting Started
 
 This project is a starting point for a Flutter application.
