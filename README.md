@@ -2,6 +2,9 @@
 Yourshop provide a platform where user sell and buy their
 Old product in very easy way it's like an olx in fluttter
 You can select your category and filter according that 
+## you can sell your products in very easy step 
+Just pick your category of item and upload the details
+And read on submit button
 ## Getting Started
 
 This project is a starting point for a Flutter application.
